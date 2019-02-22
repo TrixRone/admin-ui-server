@@ -1,0 +1,55 @@
+<mat-form-field>
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+</mat-form-field>
+
+<div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort>
+
+        <!-- ID Column -->
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> User Id </th>
+            <td mat-cell *matCellDef="let row"> {{row.user_id}} </td>
+        </ng-container>
+
+        <!-- Progress Column -->
+        <ng-container matColumnDef="timestamp">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="resetIn()"> Date </th>
+            <td mat-cell *matCellDef="let row"> {{row.timestamp * 1000 | date: 'dd-MM-yyyy hh:mm'}} </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="blockchain_currency">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Currency</th>
+            <td mat-cell *matCellDef="let row"> {{row.blockchain_currency}} </td>
+        </ng-container>
+
+        <!-- Color Column -->
+        <ng-container matColumnDef="amount">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Amount </th>
+            <td mat-cell *matCellDef="let row" > {{row.amount}} </td>
+        </ng-container>
+        <ng-container matColumnDef="from">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> From </th>
+          <td mat-cell *matCellDef="let row" > {{row.from}} </td>
+        </ng-container>
+
+      <ng-container matColumnDef="to">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> To </th>
+        <td mat-cell *matCellDef="let row" > {{row.to}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="confirmations">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Confirmations </th>
+        <td mat-cell *matCellDef="let row" > {{row.confirmations}} </td>
+      </ng-container>
+      <ng-container matColumnDef="transaction_hash">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Hash </th>
+        <td mat-cell *matCellDef="let row" > {{row.transaction_hash}} </td>
+      </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator [pageSize]="25" [pageSizeOptions]="[5, 10, 25, 100, 1000]"></mat-paginator>
+</div>

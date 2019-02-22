@@ -1,0 +1,70 @@
+
+<div mat-dialog-content *ngIf="!dialog">
+    <p>Change data {{data.namedata}}</p>
+</div>
+
+<div mat-dialog-content *ngIf="dialog" >
+  <p>Change wallets </p>
+</div>
+<div *ngIf="data.namedata !== 'activated' && data.namedata !== 'authorities' &&  data.namedata !== 'wallet_adresses'">
+<mat-form-field class="dirty">
+  <input matInput [(ngModel)]="details">
+</mat-form-field>
+  <div mat-dialog-actions>
+    <button mat-button (click)="onCansel()">Cancel</button>
+    <button mat-button (click)="onClick(true)" cdkFocusInitial>Change</button>
+  </div>
+</div>
+<div *ngIf="data.namedata === 'activated'">
+  <mat-form-field class="example-user-input" >
+    <mat-select placeholder="Tooltip position" [formControl]="position">
+      <mat-option *ngFor="let positionOption of positionOptions" [value]="positionOption">
+        {{ positionOption }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <div mat-dialog-actions>
+    <button mat-button (click)="onCansel()">Cancel</button>
+    <button mat-button (click)="onClick(false)" cdkFocusInitial>Change</button>
+  </div>
+</div>
+<div *ngIf="data.namedata == 'authorities'">
+<mat-radio-group [(ngModel)]="mode">
+  <mat-radio-button value="ROLE_VERIFIED_USER">
+    Verified user
+  </mat-radio-button>
+  <mat-radio-button value="NONE">
+    Not verified User
+  </mat-radio-button>
+</mat-radio-group>
+  <div mat-dialog-actions>
+    <button mat-button (click)="onCansel()">Cancel</button>
+    <button mat-button (click)="onUpdate()" cdkFocusInitial>Change</button>
+  </div>
+</div>
+
+<div *ngIf="data.namedata == 'wallet_adresses' && !dialog">
+  <div >Ethereum = {{walletsUser?.ethereum_address || 'Null'}}</div>
+  <div >Nem = {{walletsUser?.nem_address || 'Null'}}</div>
+  <div >Btc = {{walletsUser?.btc_address || 'Null'}}</div>
+
+  <div mat-dialog-actions>
+    <button mat-button (click)="onCansel()">Cancel</button>
+    <button mat-button (click)="openDialogWallets()">Change user wallets</button>
+  </div>
+</div>
+
+
+<div *ngIf="data.namedata == 'wallet_adresses' && dialog ">
+
+  <mat-form-field class="dirty">
+    <input matInput placeholder="ethereum" [(ngModel)]="ehereumWallet">
+  </mat-form-field>
+  <mat-form-field class="dirty">
+    <input matInput placeholder="nem" [(ngModel)]="nemWallet">
+  </mat-form-field>
+  <div mat-dialog-actions>
+    <button mat-button (click)="onCansel()">Cancel</button>
+    <button mat-button (click)="changeWallets()" cdkFocusInitial>Change</button>
+  </div>
+</div>

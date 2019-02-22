@@ -1,0 +1,23 @@
+
+<div mat-dialog-content *ngIf="!dialog">
+    <p>User Kyc Data</p>
+</div>
+<div >
+  <img [src]="base64Date" alt="123" >
+</div>
+<div >
+  <div >User name (firstname lastname) - {{kycdata.billing_address_first_name + ' ' + kycdata.billing_address_last_name}}</div>
+  <div >Birthday -  {{kycdata.birth_data | date: 'dd-MM-yyyy'}}</div>
+  <div >Address -  {{kycdata.billing_address}}</div>
+  <div >Country - {{kycdata.billing_address_country_code}}</div>
+  <div >Zipcode - {{kycdata.billing_address_zip_code}}</div>
+  <div >City - {{kycdata.billing_address_city}}</div>
+  <div >State - {{kycdata.billing_address_state}}</div>
+  <div >Phone - {{kycdata.phone}}</div>
+  <div >Document issue country - {{kycdata.document_country_code}}</div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="onCansel()">Cancel</button>
+    <button mat-button (click)="declineKyc()">Decline</button>
+    <button mat-button (click)="acceptKyc()">Accept</button>
+  </div>
+</div>
